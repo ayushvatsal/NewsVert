@@ -1,61 +1,64 @@
 package com.iiitpune.newsapp
 
-import android.net.Uri
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import androidx.browser.customtabs.CustomTabsIntent
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
+import androidx.cardview.widget.CardView
 
-class MainActivity : AppCompatActivity(), NewsItemClicked {
-    private lateinit var mAdapter: NewsListAdapter
+
+class MainActivity : AppCompatActivity(){
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val recycler = findViewById<RecyclerView>(R.id.recycler)
-        recycler.layoutManager = LinearLayoutManager(this)
-        fetchData()
-        mAdapter= NewsListAdapter( this)
-        recycler.adapter = mAdapter
+        val good = findViewById<CardView>(R.id.good)
+        val general = findViewById<CardView>(R.id.general)
+        val business = findViewById<CardView>(R.id.business)
+        val health = findViewById<CardView>(R.id.health)
+        val science = findViewById<CardView>(R.id.science)
+        val tech = findViewById<CardView>(R.id.tech)
+        good.setOnClickListener {
+            val intent: Intent = Intent(this,GoodActivity::class.java)
+            val url = "https://saurav.tech/NewsAPI/top-headlines/category/general/in.json"
+            intent.putExtra("url",url)
+            startActivity(intent)
+        }
+
+        general.setOnClickListener {
+            val intent: Intent = Intent(this,GoodActivity::class.java)
+            val url = "https://saurav.tech/NewsAPI/top-headlines/category/general/in.json"
+            intent.putExtra("url",url)
+            startActivity(intent)
+        }
+
+        business.setOnClickListener {
+            val intent: Intent = Intent(this,GoodActivity::class.java)
+            val url = "https://saurav.tech/NewsAPI/top-headlines/category/business/in.json"
+            intent.putExtra("url",url)
+            startActivity(intent)
+        }
+
+        health.setOnClickListener {
+            val intent: Intent = Intent(this,GoodActivity::class.java)
+            val url = "https://saurav.tech/NewsAPI/top-headlines/category/health/in.json"
+            intent.putExtra("url",url)
+            startActivity(intent)
+        }
+
+        science.setOnClickListener {
+            val intent: Intent = Intent(this,GoodActivity::class.java)
+            val url = "https://saurav.tech/NewsAPI/top-headlines/category/science/in.json"
+            intent.putExtra("url",url)
+            startActivity(intent)
+        }
+
+        tech.setOnClickListener {
+            val intent: Intent = Intent(this,GoodActivity::class.java)
+            val url = "https://saurav.tech/NewsAPI/top-headlines/category/technology/in.json"
+            intent.putExtra("url",url)
+            startActivity(intent)
+        }
     }
-    private fun fetchData(){
-        val url = "https://saurav.tech/NewsAPI/top-headlines/category/general/in.json"
 
-        val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
-
-                Response.Listener {
-                  val newsJsonArray = it.getJSONArray("articles")
-                    val newsArray = ArrayList<News>()
-                    for(i in 0 until newsJsonArray.length()){
-                        val newsJsonObject = newsJsonArray.getJSONObject(i)
-                        val news = News(
-                            newsJsonObject.getString("title"),
-                            newsJsonObject.getString("author"),
-                            newsJsonObject.getString("url"),
-                            newsJsonObject.getString("urlToImage"),
-                            newsJsonObject.getString("description")
-                        )
-                       val x = newsJsonObject.getString("title")
-                        newsArray.add(news)
-                    }
-                    mAdapter.updateNews(newsArray)
-                },
-                Response.ErrorListener {
-
-                }
-        )
-        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
-    }
-
-    override fun onItemClicked(item: News) {
-        val builder = CustomTabsIntent.Builder()
-        val customTabsIntent = builder.build()
-        customTabsIntent.launchUrl(this, Uri.parse(item.url))
-    }
 }
