@@ -26,35 +26,35 @@ class MainActivity : AppCompatActivity(){
         }
 
         general.setOnClickListener {
-            val intent: Intent = Intent(this,GoodActivity::class.java)
+            val intent: Intent = Intent(this,CategoryActivity::class.java)
             val url = "https://saurav.tech/NewsAPI/top-headlines/category/general/in.json"
             intent.putExtra("url",url)
             startActivity(intent)
         }
 
         business.setOnClickListener {
-            val intent: Intent = Intent(this,GoodActivity::class.java)
+            val intent: Intent = Intent(this,CategoryActivity::class.java)
             val url = "https://saurav.tech/NewsAPI/top-headlines/category/business/in.json"
             intent.putExtra("url",url)
             startActivity(intent)
         }
 
         health.setOnClickListener {
-            val intent: Intent = Intent(this,GoodActivity::class.java)
+            val intent: Intent = Intent(this,CategoryActivity::class.java)
             val url = "https://saurav.tech/NewsAPI/top-headlines/category/health/in.json"
             intent.putExtra("url",url)
             startActivity(intent)
         }
 
         science.setOnClickListener {
-            val intent: Intent = Intent(this,GoodActivity::class.java)
+            val intent: Intent = Intent(this,CategoryActivity::class.java)
             val url = "https://saurav.tech/NewsAPI/top-headlines/category/science/in.json"
             intent.putExtra("url",url)
             startActivity(intent)
         }
 
         tech.setOnClickListener {
-            val intent: Intent = Intent(this,GoodActivity::class.java)
+            val intent: Intent = Intent(this,CategoryActivity::class.java)
             val url = "https://saurav.tech/NewsAPI/top-headlines/category/technology/in.json"
             intent.putExtra("url",url)
             startActivity(intent)
