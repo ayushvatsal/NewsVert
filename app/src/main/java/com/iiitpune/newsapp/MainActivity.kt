@@ -3,7 +3,9 @@ package com.iiitpune.newsapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.cardview.widget.CardView
+import com.airbnb.lottie.LottieAnimationView
 
 
 class MainActivity : AppCompatActivity(){
@@ -11,7 +13,6 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val good = findViewById<CardView>(R.id.good)
         val general = findViewById<CardView>(R.id.general)
         val business = findViewById<CardView>(R.id.business)
