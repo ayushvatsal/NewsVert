@@ -9,18 +9,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
+import com.ethanhua.skeleton.Skeleton
+import com.ethanhua.skeleton.SkeletonScreen
 
 class CategoryActivity : AppCompatActivity() ,NewsItemClicked{
     private lateinit var mAdapter: NewsListAdapter
+    private lateinit var skeleton:SkeletonScreen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_good)
 
         val recycler = findViewById<RecyclerView>(R.id.recycler)
         recycler.layoutManager = LinearLayoutManager(this)
+
         fetchData()
         mAdapter= NewsListAdapter( this)
         recycler.adapter = mAdapter
+        skeleton =  Skeleton.bind(recycler).adapter(mAdapter).load(R.layout.item_news).show()
+
     }
     private fun fetchData(){
         val url = intent.getStringExtra("url")
@@ -41,6 +47,7 @@ class CategoryActivity : AppCompatActivity() ,NewsItemClicked{
                         )
                         val x = newsJsonObject.getString("title")
                         newsArray.add(news)
+                        skeleton.hide()
                     }
                     mAdapter.updateNews(newsArray)
                 },
