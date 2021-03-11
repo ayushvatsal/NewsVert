@@ -21,42 +21,54 @@ class MainActivity : AppCompatActivity(){
         val tech = findViewById<CardView>(R.id.tech)
         good.setOnClickListener {
             val intent: Intent = Intent(this,GoodActivity::class.java)
+            val category:String = "Good News"
             val url = "https://saurav.tech/NewsAPI/top-headlines/category/general/in.json"
+            intent.putExtra("category",category)
             intent.putExtra("url",url)
             startActivity(intent)
         }
 
         general.setOnClickListener {
+            val category:String = "General"
             val intent: Intent = Intent(this,CategoryActivity::class.java)
             val url = "https://saurav.tech/NewsAPI/top-headlines/category/general/in.json"
             intent.putExtra("url",url)
+            intent.putExtra("category",category)
             startActivity(intent)
         }
 
         business.setOnClickListener {
             val intent: Intent = Intent(this,CategoryActivity::class.java)
+            val category:String = "Business"
             val url = "https://saurav.tech/NewsAPI/top-headlines/category/business/in.json"
+            intent.putExtra("category",category)
             intent.putExtra("url",url)
             startActivity(intent)
         }
 
         health.setOnClickListener {
             val intent: Intent = Intent(this,CategoryActivity::class.java)
+            val category:String = "Health"
             val url = "https://saurav.tech/NewsAPI/top-headlines/category/health/in.json"
+            intent.putExtra("category",category)
             intent.putExtra("url",url)
             startActivity(intent)
         }
 
         science.setOnClickListener {
             val intent: Intent = Intent(this,CategoryActivity::class.java)
+            val category:String = "Science"
             val url = "https://saurav.tech/NewsAPI/top-headlines/category/science/in.json"
+            intent.putExtra("category",category)
             intent.putExtra("url",url)
             startActivity(intent)
         }
 
         tech.setOnClickListener {
             val intent: Intent = Intent(this,CategoryActivity::class.java)
+            val category:String = "Technology"
             val url = "https://saurav.tech/NewsAPI/top-headlines/category/technology/in.json"
+            intent.putExtra("category",category)
             intent.putExtra("url",url)
             startActivity(intent)
         }

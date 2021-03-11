@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,8 @@ class GoodActivity : AppCompatActivity() ,NewsItemClicked{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_good)
+        var category = findViewById<TextView>(R.id.category)
+        category.text = intent.getStringExtra("category").toString()
 
         back_button = findViewById<ImageView>(R.id.back_button)
         back_button.setOnClickListener{
@@ -36,7 +39,6 @@ class GoodActivity : AppCompatActivity() ,NewsItemClicked{
     }
     private fun fetchData(){
         val url = intent.getStringExtra("url")
-
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
 
                 Response.Listener {
