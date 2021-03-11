@@ -1,8 +1,10 @@
 package com.iiitpune.newsapp
 
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,12 +17,17 @@ import com.ethanhua.skeleton.SkeletonScreen
 class CategoryActivity : AppCompatActivity() ,NewsItemClicked{
     private lateinit var mAdapter: NewsListAdapter
     private lateinit var skeleton:SkeletonScreen
+    private lateinit var back_button: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_good)
 
         val recycler = findViewById<RecyclerView>(R.id.recycler)
         recycler.layoutManager = LinearLayoutManager(this)
+        back_button = findViewById<ImageView>(R.id.back_button)
+        back_button.setOnClickListener{
+            onBackPressed()
+        }
 
         fetchData()
         mAdapter= NewsListAdapter( this)
