@@ -2,6 +2,7 @@ package com.iiitpune.newsapp
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -64,12 +65,12 @@ class GoodActivity : AppCompatActivity(), NewsItemClicked {
                                 newsJsonObject.getString("description")
                         )
                         val x = newsJsonObject.getString("description")
-                        println(x)
+
                         var con1: Float? = classify(x)
-                        println("up1" + con1)
+                        Log.d("classify",x)
+                        Log.d("classify",con1.toString())
                         if (con1 != null) {
                             if (con1 >= 0.5) {
-                                println("up" + con1)
                                 newsArray.add(news)
                             }
                         }
@@ -89,9 +90,7 @@ class GoodActivity : AppCompatActivity(), NewsItemClicked {
         val results = textClassifier!!.classify(text)
         for (i in results) {
             if (i.label == "Positive") {
-                println(con)
                 con = i.score
-                println(con)
             }
         }
         return con
