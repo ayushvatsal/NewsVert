@@ -2,10 +2,12 @@ package com.iiitpune.newsapp
 
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.view.size
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -13,6 +15,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.ethanhua.skeleton.Skeleton
 import com.ethanhua.skeleton.SkeletonScreen
+import com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout
 
 class CategoryActivity : AppCompatActivity(), NewsItemClicked {
     private lateinit var mAdapter: NewsListAdapter
@@ -36,6 +39,17 @@ class CategoryActivity : AppCompatActivity(), NewsItemClicked {
         mAdapter = NewsListAdapter(this)
         recycler.adapter = mAdapter
         skeleton = Skeleton.bind(recycler).adapter(mAdapter).load(R.layout.item_news).show()
+        var reload : LottieSwipeRefreshLayout = findViewById<LottieSwipeRefreshLayout>(R.id.reload)
+        reload.setOnRefreshListener{
+            skeleton = Skeleton.bind(recycler).adapter(mAdapter).load(R.layout.item_news).show()
+            Handler().postDelayed({
+                fetchData()
+                mAdapter = NewsListAdapter(this)
+                recycler.adapter = mAdapter
+                reload.isRefreshing = false
+            },1500)
+
+        }
 
     }
 
