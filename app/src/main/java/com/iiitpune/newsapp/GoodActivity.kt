@@ -1,10 +1,10 @@
 package com.iiitpune.newsapp
 
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,12 +13,19 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.ethanhua.skeleton.Skeleton
 import com.ethanhua.skeleton.SkeletonScreen
+import org.tensorflow.lite.task.text.nlclassifier.NLClassifier
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
-class GoodActivity : AppCompatActivity() ,NewsItemClicked{
+class GoodActivity : AppCompatActivity(), NewsItemClicked {
 
     private lateinit var mAdapter: NewsListAdapter
     private lateinit var skeleton: SkeletonScreen
     private lateinit var back_button: ImageView
+    private var executorService: ExecutorService? = null
+    private var textClassifier: NLClassifier? = null
+    private var path: String = "text_classification_v2.tflite"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_good)
@@ -26,25 +33,28 @@ class GoodActivity : AppCompatActivity() ,NewsItemClicked{
         category.text = intent.getStringExtra("category").toString()
 
         back_button = findViewById<ImageView>(R.id.back_button)
-        back_button.setOnClickListener{
+        back_button.setOnClickListener {
             onBackPressed()
         }
+        executorService = Executors.newSingleThreadExecutor()
+        textClassifier = NLClassifier.createFromFile(this, path)
 
         val recycler = findViewById<RecyclerView>(R.id.recycler)
         recycler.layoutManager = LinearLayoutManager(this)
         fetchData()
-        mAdapter= NewsListAdapter( this)
+        mAdapter = NewsListAdapter(this)
         recycler.adapter = mAdapter
-        skeleton =  Skeleton.bind(recycler).adapter(mAdapter).load(R.layout.item_news).show()
+        skeleton = Skeleton.bind(recycler).adapter(mAdapter).load(R.layout.item_news).show()
     }
-    private fun fetchData(){
+
+    private fun fetchData() {
         val url = intent.getStringExtra("url")
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
 
                 Response.Listener {
                     val newsJsonArray = it.getJSONArray("articles")
                     val newsArray = ArrayList<News>()
-                    for(i in 0 until newsJsonArray.length()){
+                    for (i in 0 until newsJsonArray.length()) {
                         val newsJsonObject = newsJsonArray.getJSONObject(i)
                         val news = News(
                                 newsJsonObject.getString("title"),
@@ -53,8 +63,16 @@ class GoodActivity : AppCompatActivity() ,NewsItemClicked{
                                 newsJsonObject.getString("urlToImage"),
                                 newsJsonObject.getString("description")
                         )
-                        val x = newsJsonObject.getString("title")
-                        newsArray.add(news)
+                        val x = newsJsonObject.getString("description")
+                        println(x)
+                        var con1: Float? = classify(x)
+                        println("up1" + con1)
+                        if (con1 != null) {
+                            if (con1 >= 0.5) {
+                                println("up" + con1)
+                                newsArray.add(news)
+                            }
+                        }
                         skeleton.hide()
                     }
                     mAdapter.updateNews(newsArray)
@@ -65,6 +83,20 @@ class GoodActivity : AppCompatActivity() ,NewsItemClicked{
         )
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
     }
+
+    private fun classify(text: String): Float? {
+        var con: Float? = 0.0f
+        val results = textClassifier!!.classify(text)
+        for (i in results) {
+            if (i.label == "Positive") {
+                println(con)
+                con = i.score
+                println(con)
+            }
+        }
+        return con
+    }
+
     override fun onItemClicked(item: News) {
         val builder = CustomTabsIntent.Builder()
         val customTabsIntent = builder.build()

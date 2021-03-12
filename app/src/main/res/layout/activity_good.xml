@@ -1,45 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="52dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/back_button"
-                android:layout_marginStart="18dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_keyboard_backspace_24"
-                android:layout_centerVertical="true"/>
-            <TextView
-                android:layout_marginStart="15dp"
-                android:textStyle="bold"
-                android:id="@+id/category"
-                android:textColor="@color/white"
-                android:layout_toEndOf="@+id/back_button"
                 android:layout_centerVertical="true"
-                android:textSize="19sp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/ic_baseline_keyboard_backspace_24" />
+
+            <TextView
+                android:id="@+id/category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@+id/back_button"
                 android:text="Category"
-                />
+                android:textColor="@color/white"
+                android:textSize="19sp"
+                android:textStyle="bold" />
         </RelativeLayout>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/appbar"
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recycler"
-        />
+        android:layout_below="@+id/appbar" />
 </RelativeLayout>

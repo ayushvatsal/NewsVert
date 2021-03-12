@@ -1,17 +1,17 @@
 package com.iiitpune.newsapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
 
 class splash : AppCompatActivity() {
     lateinit var handler: Handler
-    lateinit var logo:ImageView
-    lateinit var appName :ImageView
-    lateinit var splashImg :ImageView
+    lateinit var logo: ImageView
+    lateinit var appName: ImageView
+    lateinit var splashImg: ImageView
     lateinit var lottieAnimationView: LottieAnimationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,9 +29,9 @@ class splash : AppCompatActivity() {
 
         handler = Handler()
         handler.postDelayed({
-            val intent = Intent(this,MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-        },4880)
+        }, 4880)
     }
 }
