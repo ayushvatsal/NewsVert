@@ -29,7 +29,7 @@ class GoodActivity : AppCompatActivity(), NewsItemClicked {
     private var executorService: ExecutorService? = null
     private var textClassifier: NLClassifier? = null
     private var path: String = "text_classification_v2.tflite"
-
+    val newsArray = ArrayList<News>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +46,13 @@ class GoodActivity : AppCompatActivity(), NewsItemClicked {
 
         val recycler = findViewById<RecyclerView>(R.id.recycler)
         recycler.layoutManager = LinearLayoutManager(this)
-        fetchData()
+        fetchData(intent.getStringExtra("url"))
+        fetchData("https://saurav.tech/NewsAPI/top-headlines/category/business/in.json")
+        fetchData("https://saurav.tech/NewsAPI/top-headlines/category/health/in.json")
+        fetchData("https://saurav.tech/NewsAPI/top-headlines/category/science/in.json")
+        fetchData("https://saurav.tech/NewsAPI/top-headlines/category/technology/in.json")
+        fetchData("https://saurav.tech/NewsAPI/top-headlines/category/sports/in.json")
+        fetchData("https://saurav.tech/NewsAPI/top-headlines/category/entertainment/in.json")
         mAdapter = NewsListAdapter(this)
         recycler.adapter = mAdapter
         skeleton = Skeleton.bind(recycler).adapter(mAdapter).load(R.layout.item_news).show()
@@ -54,7 +60,13 @@ class GoodActivity : AppCompatActivity(), NewsItemClicked {
         reload.setOnRefreshListener{
             skeleton = Skeleton.bind(recycler).adapter(mAdapter).load(R.layout.item_news).show()
             Handler().postDelayed({
-                fetchData()
+                fetchData(intent.getStringExtra("url"))
+                fetchData("https://saurav.tech/NewsAPI/top-headlines/category/business/in.json")
+                fetchData("https://saurav.tech/NewsAPI/top-headlines/category/health/in.json")
+                fetchData("https://saurav.tech/NewsAPI/top-headlines/category/science/in.json")
+                fetchData("https://saurav.tech/NewsAPI/top-headlines/category/technology/in.json")
+                fetchData("https://saurav.tech/NewsAPI/top-headlines/category/sports/in.json")
+                fetchData("https://saurav.tech/NewsAPI/top-headlines/category/entertainment/in.json")
                 mAdapter = NewsListAdapter(this)
                 recycler.adapter = mAdapter
                 reload.isRefreshing = false
@@ -64,13 +76,12 @@ class GoodActivity : AppCompatActivity(), NewsItemClicked {
 
     }
 
-    private fun fetchData() {
-        val url = intent.getStringExtra("url")
+    private fun fetchData(url: String) {
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
 
                 Response.Listener {
                     val newsJsonArray = it.getJSONArray("articles")
-                    val newsArray = ArrayList<News>()
+
                     for (i in 0 until newsJsonArray.length()) {
                         val newsJsonObject = newsJsonArray.getJSONObject(i)
                         val news = News(
@@ -86,7 +97,7 @@ class GoodActivity : AppCompatActivity(), NewsItemClicked {
                         Log.d("classify",x)
                         Log.d("classify",con1.toString())
                         if (con1 != null) {
-                            if (con1 >= 0.5) {
+                            if (con1 >= 0.6) {
                                 newsArray.add(news)
                             }
                         }
