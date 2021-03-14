@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.github.mohammadatif:Animatoo:master'
     implementation 'com.github.nabil6391:LottieSwipeRefreshLayout:1.0.0'
     implementation 'org.tensorflow:tensorflow-lite-task-text:0.1.0'
     implementation 'com.ethanhua:skeleton:1.1.2'

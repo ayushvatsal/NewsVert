@@ -6,6 +6,7 @@ import android.os.Handler
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
+import com.blogspot.atifsoftwares.animatoolib.Animatoo
 
 class splash : AppCompatActivity() {
     lateinit var handler: Handler

@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import com.blogspot.atifsoftwares.animatoolib.Animatoo
 
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("category", category)
             intent.putExtra("url", url)
             startActivity(intent)
+            Animatoo.animateSlideLeft(this)
         }
 
         general.setOnClickListener {
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("url", url)
             intent.putExtra("category", category)
             startActivity(intent)
+            Animatoo.animateSlideLeft(this)
         }
 
         business.setOnClickListener {
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("category", category)
             intent.putExtra("url", url)
             startActivity(intent)
+            Animatoo.animateSlideLeft(this)
         }
 
         health.setOnClickListener {
@@ -51,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("category", category)
             intent.putExtra("url", url)
             startActivity(intent)
+            Animatoo.animateSlideLeft(this)
         }
 
         science.setOnClickListener {
@@ -60,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("category", category)
             intent.putExtra("url", url)
             startActivity(intent)
+            Animatoo.animateSlideLeft(this)
         }
 
         tech.setOnClickListener {
@@ -69,6 +74,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("category", category)
             intent.putExtra("url", url)
             startActivity(intent)
+            Animatoo.animateSlideLeft(this)
         }
     }
 

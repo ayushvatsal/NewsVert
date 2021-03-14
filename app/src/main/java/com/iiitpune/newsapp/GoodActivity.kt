@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
+import com.blogspot.atifsoftwares.animatoolib.Animatoo
 import com.ethanhua.skeleton.Skeleton
 import com.ethanhua.skeleton.SkeletonScreen
 import com.nabilmh.lottieswiperefreshlayout.LottieSwipeRefreshLayout
@@ -122,7 +123,10 @@ class GoodActivity : AppCompatActivity(), NewsItemClicked {
         }
         return con
     }
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        Animatoo.animateSlideRight(this);
+    }
     override fun onItemClicked(item: News) {
         val builder = CustomTabsIntent.Builder()
         val customTabsIntent = builder.build()
