@@ -12,10 +12,10 @@
 # User Interface
 
 <br>
-<img src="https://raw.githubusercontent.com/ayushvatsal/NewsVert/master/readme-images/news3.gif" width="25%"/>
-<img src="https://docs.google.com/uc?export=download&id=1ajdJljbFploi-Iebo_Nii0RRN1h6dKe4" width="25%"/>
-<img src="https://raw.githubusercontent.com/ayushvatsal/NewsVert/master/readme-images/news1.gif" width="25%"/>
-<img src="https://docs.google.com/uc?export=download&id=1aiEBNmSFGwAP_Gm-o3AN7dRz876Sq4I1" width="25%"/>
+<img src="https://raw.githubusercontent.com/ayushvatsal/NewsVert/master/readme-images/news3.gif" width="22%"/>
+<img src="https://docs.google.com/uc?export=download&id=1ajdJljbFploi-Iebo_Nii0RRN1h6dKe4" width="22%"/>
+<img src="https://raw.githubusercontent.com/ayushvatsal/NewsVert/master/readme-images/news1.gif" width="22%"/>
+<img src="https://docs.google.com/uc?export=download&id=1aiEBNmSFGwAP_Gm-o3AN7dRz876Sq4I1" width="22%"/>
 <br>
 <br>
 <br>
